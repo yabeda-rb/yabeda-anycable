@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-RSpec.describe Yabeda::Anycable do
+RSpec.describe Yabeda::AnyCable do
   it "has a version number" do
-    expect(Yabeda::Anycable::VERSION).not_to be nil
+    expect(Yabeda::AnyCable::VERSION).not_to be nil
   end
 
-  it "does something useful" do
-    expect(false).to eq(true)
+  it "injects middleware to AnyCable RPC server" do
+    expect(AnyCable.middleware.to_a).to include(kind_of(Yabeda::AnyCable::Middleware))
   end
 end
