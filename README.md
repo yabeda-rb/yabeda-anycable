@@ -4,6 +4,8 @@ Built-in metrics for monitoring [AnyCable] RPC server out of the box! Part of th
 
 See [AnyCable architecture](https://docs.anycable.io/architecture) on details on what AnyCable RPC server is. For monitoring of [AnyCable] websocket server you will need to use [monitoring capabilities](https://docs.anycable.io/anycable-go/instrumentation) built in [anycable-go] itself.
 
+Get sample Grafana dashboard from [Grafana.com #14793](https://grafana.com/grafana/dashboards/14793) or from [`grafana-dashboard.json`](./grafana-dashboard.json) file.
+
 ## Installation
 
 ```ruby
