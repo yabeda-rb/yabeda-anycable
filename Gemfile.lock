@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    yabeda-anycable (0.1.0)
+    yabeda-anycable (0.1.1)
       anycable-core (~> 1.1)
       yabeda (~> 0.10)
 
