@@ -16,9 +16,9 @@ module Yabeda
     ].freeze
 
     ::AnyCable.configure_server do
-      ::AnyCable.middleware.use(Middleware)
-
       ::Yabeda.configure do
+        ::AnyCable.middleware.use(Middleware)
+
         group :anycable
 
         counter :rpc_call_count, tags: %i[method command status], comment: "RPC calls count"
