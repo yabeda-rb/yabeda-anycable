@@ -1,3 +1,9 @@
+## [0.1.2] - 2022-09-21
+
+### Fixed
+
+- Handle the case when application code raises an error on command. See [pull request №4](https://github.com/yabeda-rb/yabeda-anycable/pull/4)
+
 ## [0.1.1] - 2022-02-15
 
 ### Changed
