@@ -32,6 +32,16 @@ RSpec.describe Yabeda::AnyCable::Middleware do
         .with(be_between(0.005, 0.05))
         .with_tags(method: "connect", command: "", status: "SUCCESS")
     end
+
+    context "when request handling fails" do
+      let(:block) { proc { raise "Something went wrong by itself!" } }
+
+      it "doesn't swallow exception (let AnyCable Exception middleware handle it)" do
+        expect { call_middleware }.to raise_exception(RuntimeError).and \
+          increment_yabeda_counter(Yabeda.anycable.rpc_call_count)
+          .with_tags(method: "connect", command: "", status: "ERROR")
+      end
+    end
   end
 
   context "with command request" do
@@ -54,6 +64,16 @@ RSpec.describe Yabeda::AnyCable::Middleware do
         measure_yabeda_histogram(Yabeda.anycable.rpc_call_runtime)
         .with(be_between(0.005, 0.05))
         .with_tags(method: "command", command: "subscribe", status: "SUCCESS")
+    end
+
+    context "when command handling fails" do
+      let(:block) { proc { raise ArgumentError, "You did something completely wrong!" } }
+
+      it "doesn't swallow exception (let AnyCable Exception middleware handle it)" do
+        expect { call_middleware }.to raise_exception(ArgumentError).and \
+          increment_yabeda_counter(Yabeda.anycable.rpc_call_count)
+          .with_tags(method: "command", command: "subscribe", status: "ERROR")
+      end
     end
   end
 end

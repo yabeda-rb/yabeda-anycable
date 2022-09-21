@@ -11,8 +11,9 @@ module Yabeda
         (response = yield)
       ensure
         elapsed = (Process.clock_gettime(Process::CLOCK_MONOTONIC) - started).round(4)
-        labels = { method: rpc_method_name.to_s, status: response.status.to_s }
-        labels[:command] = request.respond_to?(:command) ? request.command : ""
+        status  = response.respond_to?(:status) ? response.status.to_s : "ERROR"
+        command = request.respond_to?(:command) ? request.command : ""
+        labels  = { method: rpc_method_name.to_s, status: status, command: command }
         ::Yabeda.anycable.rpc_call_count.increment(labels)
         ::Yabeda.anycable.rpc_call_runtime.measure(labels, elapsed)
       end
